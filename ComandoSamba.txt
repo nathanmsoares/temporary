@@ -1,0 +1,28 @@
+apt install samba
+systemctl status smbd
+systemctl status nmbd
+cd home
+mkdir publica
+chmod -R 777 publica
+useradd -m usuario
+pdbedit -w -L (Lista usuário SAMBA)
+smbpasswd -a
+pdbedit -x -u (Deletar usuario)
+cd /etc/samba
+vi samba.conf
+configurar pastas
+[publica]
+path = /home/publica
+read only = no
+[atividades]
+path = /home/atividades
+read only = no
+read list = usuario (usuario pode apenas ler)
+testparm (verifica script de configuração e mostra o que está sendo compartilhado para a rede windows)
+restartar os serviços smbd, nmdb
+systemctl restart smbd
+systemctl restart nmbd
+
+
+https://www.youtube.com/watch?v=xMJfWeLLnMA&list=PLbEOwbQR9lqx8dx4_RqSl97jTJoj7x_q-&index=18
+https://wiki.samba.org/index.php/User_Documentation
